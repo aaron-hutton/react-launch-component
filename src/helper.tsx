@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  FC,
   PropsWithChildren,
   useContext,
   useState,
@@ -12,7 +13,7 @@ import {
 } from "./input-management-types";
 import { ContextType, ProviderStateType } from "./operation-types";
 
-const INITIAL_STATE = { dialog: null, notification: null };
+const INITIAL_STATE = { dialog: null, notifications: [] };
 
 const MS_PER_SECOND = 1000;
 
@@ -22,12 +23,20 @@ export interface ReactLauncherOptions<
 > {
   dialogs?: DIALOGS;
   notifications?: NOTIFICATIONS;
+
+  notificationsWrapper?: FC<PropsWithChildren>;
 }
 
 export function createReactLauncher<
   DIALOGS extends DialogList,
   NOTIFICATIONS extends NotificationList
->({ dialogs, notifications }: ReactLauncherOptions<DIALOGS, NOTIFICATIONS>) {
+>({
+  dialogs,
+  notifications,
+  notificationsWrapper: NotificationsWrapper = ({ children }) => (
+    <>{children}</>
+  ),
+}: ReactLauncherOptions<DIALOGS, NOTIFICATIONS>) {
   const context = createContext<ContextType<DIALOGS, NOTIFICATIONS>>({
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     launchDialog: () => {},
@@ -51,11 +60,6 @@ export function createReactLauncher<
         setLaunchState((current) => ({ ...current, dialog: null })),
     };
 
-    const notification =
-      launchState.notification !== null
-        ? notifications?.[launchState.notification.key]
-        : undefined;
-
     const launchDialog: LaunchDialogFunction<DIALOGS> = (key, params) => {
       setLaunchState((current) => ({ ...current, dialog: { key, params } }));
     };
@@ -65,21 +69,44 @@ export function createReactLauncher<
       timeout,
       params
     ) => {
+      const instanceId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
       setLaunchState((current) => ({
         ...current,
-        notification: { key, params },
+        notifications: [
+          ...current.notifications,
+          {
+            id: instanceId,
+            key,
+            params,
+          },
+        ],
       }));
 
       setTimeout(() => {
-        setLaunchState((current) => ({ ...current, notification: null }));
+        setLaunchState((current) => ({
+          ...current,
+          notifications: current.notifications.filter(
+            ({ id }) => id !== instanceId
+          ),
+        }));
       }, timeout * MS_PER_SECOND);
     };
 
     return (
       <>
         {dialog !== undefined && dialog(dialogProps)}
-        {notification !== undefined &&
-          notification(launchState.notification?.params)}
+        <NotificationsWrapper>
+          {launchState.notifications.map(({ id, key, params }) => {
+            const Component = notifications?.[key];
+
+            if (Component === undefined) {
+              return;
+            }
+
+            //@ts-expect-error Complaining about the key
+            return <Component key={id} {...params} />;
+          })}
+        </NotificationsWrapper>
 
         <context.Provider value={{ launchDialog, launchNotification }}>
           {children}

@@ -22,8 +22,9 @@ export type ProviderStateType<
     params: Record<string, unknown>;
   } | null;
 
-  notification: {
+  notifications: {
+    id: number;
     key: keyof NOTIFICATIONS;
     params: Record<string, unknown>;
-  } | null;
+  }[];
 };

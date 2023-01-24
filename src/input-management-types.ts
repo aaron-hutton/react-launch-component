@@ -1,13 +1,13 @@
-import { ReactNode } from "react";
-
 //***** Dialogs *****//
 // type BaseDialogParams = {
 //   onClose: () => void;
 // };
 
+import { FC } from "react";
+
 // Cannot work out how to force an onClose function here
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Dialog = (p: any) => ReactNode;
+type Dialog = FC<any>;
 
 export type DialogList = {
   [a: string]: Dialog;
@@ -22,7 +22,7 @@ export type LaunchDialogFunction<DIALOGS extends DialogList> = <
 
 //***** Notifications *****//
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Notification = (p: any) => ReactNode;
+type Notification = FC<any>;
 
 export type NotificationList = {
   [a: string]: Notification;
