@@ -1,5 +1,11 @@
 # react-launch-component
 
+## 0.2.0
+
+### Minor Changes
+
+- 12aa435: Added eslint checking and fixed resulting errors
+
 ## 0.1.2
 
 ### Patch Changes
