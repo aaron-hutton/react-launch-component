@@ -1,5 +1,11 @@
 # react-launch-component
 
+## 0.1.2
+
+### Patch Changes
+
+- b9040bd: Making package build before deploying
+
 ## 0.1.1
 
 ### Patch Changes
