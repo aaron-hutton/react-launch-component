@@ -19,11 +19,11 @@ export type ProviderStateType<
 > = {
   dialog: {
     key: keyof DIALOGS;
-    params: any;
+    params: Record<string, unknown>;
   } | null;
 
   notification: {
     key: keyof NOTIFICATIONS;
-    params: any;
+    params: Record<string, unknown>;
   } | null;
 };

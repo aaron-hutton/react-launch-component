@@ -24,7 +24,10 @@ export function createReactLauncher<
   NOTIFICATIONS extends NotificationList
 >({ dialogs, notifications }: ReactLauncherOptions<DIALOGS, NOTIFICATIONS>) {
   const context = createContext<ContextType<DIALOGS, NOTIFICATIONS>>({
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     launchDialog: () => {},
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     launchNotification: () => {},
   });
 
@@ -39,7 +42,7 @@ export function createReactLauncher<
 
     const dialogProps = {
       ...launchState.dialog?.params,
-      onClick: () =>
+      onClose: () =>
         setLaunchState((current) => ({ ...current, dialog: null })),
     };
 
