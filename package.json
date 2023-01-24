@@ -1,7 +1,7 @@
 {
   "name": "react-launch-component",
   "license": "MIT",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
