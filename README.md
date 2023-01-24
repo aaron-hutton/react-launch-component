@@ -1,4 +1,4 @@
-# React-Launch - Launch react components
+# React Launch Component
 
 Launch dialogs or notifications in your react app from anywhere.
 
@@ -15,7 +15,7 @@ Sometimes it's useful to be able to launch a dialog or notification as a functio
 
 Simply pass a list of the dialogs or notifications into the provider, call the hook in your component and you can launch your dialogs without any extra state. You can even pass type-safe arguments directly into your dialogs.
 
-Ready to learn more? Check our our [example](https://github.com/aaron-hutton/react-launch/tree/main/example).
+Ready to learn more? Check our our [example](https://github.com/aaron-hutton/react-launch-component/tree/main/example).
 
 # Install
 
