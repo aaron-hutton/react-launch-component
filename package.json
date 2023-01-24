@@ -6,7 +6,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup src/index.ts",
     "lint": "tsc && eslint src",
     "release": "changeset publish"
   },
@@ -26,6 +26,21 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/aaron-hutton/react-launch-component.git"
+  },
+  "tsup": {
+    "treeshake": true,
+    "sourcemap": true,
+    "minify": true,
+    "clean": true,
+    "dts": true,
+    "splitting": false,
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "external": [
+      "react"
+    ]
   },
   "files": [
     "dist"
