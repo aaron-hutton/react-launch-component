@@ -1,5 +1,11 @@
 # react-launch-component
 
+## 0.2.1
+
+### Patch Changes
+
+- 36a16d6: Added license, hopefully fixed JSX related issues
+
 ## 0.2.0
 
 ### Minor Changes
