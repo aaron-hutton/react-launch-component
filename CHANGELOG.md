@@ -1,5 +1,11 @@
 # react-launch-component
 
+## 0.2.2
+
+### Patch Changes
+
+- 742b1db: Added notifications wrapper and allow multiple notifications at once
+
 ## 0.2.1
 
 ### Patch Changes
