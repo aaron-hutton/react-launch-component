@@ -49,7 +49,7 @@ export function createReactLauncher<
     const [launchState, setLaunchState] =
       useState<ProviderStateType<DIALOGS, NOTIFICATIONS>>(INITIAL_STATE);
 
-    const dialog =
+    const Dialog =
       launchState.dialog !== null
         ? dialogs?.[launchState.dialog.key]
         : undefined;
@@ -94,7 +94,10 @@ export function createReactLauncher<
 
     return (
       <>
-        {dialog !== undefined && dialog(dialogProps)}
+        {Dialog !== undefined && (
+          //@ts-expect-error Complaining about the props
+          <Dialog {...dialogProps} />
+        )}
         <NotificationsWrapper>
           {launchState.notifications.map(({ id, key, params }) => {
             const Component = notifications?.[key];
