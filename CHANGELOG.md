@@ -1,5 +1,11 @@
 # react-launch-component
 
+## 0.2.3
+
+### Patch Changes
+
+- 2abf159: Fixing new hooks being added when launching dialogs
+
 ## 0.2.2
 
 ### Patch Changes
